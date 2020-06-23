@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { Dialogs } from '@ionic-native/dialogs/ngx';
 import { QRScanner, QRScannerStatus} from '@ionic-native/qr-scanner/ngx';
 import { Platform } from '@ionic/angular';
-
-
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 
 @Component({
@@ -18,13 +17,16 @@ export class Tab1Page {
 
   public scanner : any;
 
-  constructor(private qrScanner :QRScanner, private dialog : Dialogs, private platform : Platform ) 
+  public leitura : string;
+
+  constructor(private qrScanner :QRScanner, private dialog : Dialogs, private platform : Platform,
+    private screenOrientation: ScreenOrientation) 
   {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+
     this.platform.backButton.subscribeWithPriority(0, () => {
       this.corpoPagina.style.opacity = "1";
       this.img.style.opacity = "1";
-
-
       this.qrScanner.hide();
     })
   }
@@ -45,10 +47,9 @@ export class Tab1Page {
         this.qrScanner.show();
 
         // start scanning
-        this.scanner = this.qrScanner.scan().subscribe((text: string) => {
-          console.log('Scanned something', text);
-
-          this.dialog.alert('Resultado: ' + text);
+        this.scanner = this.qrScanner.scan().subscribe((text : string) => {
+          
+          this.leitura = "Resultado: " + "https://www.youtube.com/watch?v=ywgTVIBHhSM";
 
           this.corpoPagina.style.opacity = "1";
           this.img.style.opacity = "1";
@@ -56,7 +57,6 @@ export class Tab1Page {
           this.qrScanner.hide(); // fecha a camera 
           this.scanner.unsubscribe(); // para de funcionar
         });
-
       } else if (status.denied) {
         // camera permission was permanently denied
         // you must use QRScanner.openSettings() method to guide the user to the settings page
@@ -68,7 +68,5 @@ export class Tab1Page {
     .catch((e: any) => console.log('Error is', e));
 
   }
-
-
   
 }

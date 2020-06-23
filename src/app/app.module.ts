@@ -11,6 +11,9 @@ import { AppComponent } from './app.component';
 import { Dialogs } from '@ionic-native/dialogs/ngx';
 import { QRScanner } from '@ionic-native/qr-scanner/ngx';
 
+//para deixar o aplicativo em uma direção unicamente
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +24,7 @@ import { QRScanner } from '@ionic-native/qr-scanner/ngx';
     SplashScreen,
     QRScanner,
     Dialogs,
+    ScreenOrientation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

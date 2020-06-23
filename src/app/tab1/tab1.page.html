@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="dark">
     <ion-title>
-      Leitor
+      Leitor QR Code
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -17,6 +17,7 @@
 <!-- Footer without a border -->
 <ion-footer class="ion-no-border">
   <ion-toolbar color="dark">
-    <ion-button color="primary" (click)="lerQRCode()" fill="block">Ler QRCode</ion-button>
+    <ion-input aria-readonly="scanner"></ion-input>
+    <ion-button color="Secondary" (click)="lerQRCode()" fill="block">Ler QRCode</ion-button>
   </ion-toolbar>
 </ion-footer>
